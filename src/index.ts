@@ -85,7 +85,19 @@ app.get('/customers/type/:type', async (req, res, next) => {
   return res.send(customers)
 })
 
+//@router GET /customers/state/:state
+//@desc Menampilkan data sesuai value params Path dari state
+app.get('/customers/state/:state', async (req, res, next) => {
+  let customers: CustomerType[]
+  const state = req.params.state as string
 
+  try {
+    customers = await customerModel.getByState(state)
+  } catch (error) {
+    return next(error)
+  }
+  res.json(customers)
+})
 
 app.listen(4000, () => {
   console.log('App listen to port 4000');

@@ -115,4 +115,23 @@ export class Customer {
     }
   }
 
+  async getByState(state: string) {
+    let result: CustomerType[]
+    try {
+      result = await this.model.aggregate([
+        {
+          $match: {
+            state: {
+              $regex: state,
+              $options: 'i'
+            }
+          }
+        }
+      ]).exec()
+    } catch (error) {
+      throw error
+    }
+    return result
+  }
+
 }
