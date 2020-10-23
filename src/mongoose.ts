@@ -134,7 +134,7 @@ export class Customer {
     return result
   }
 
-  // Ambil age dimana age collection < age input
+  // Ambil age dimana age collection <= age input
   async getByAge(age: number) {
     let result: CustomerType[]
     try {
