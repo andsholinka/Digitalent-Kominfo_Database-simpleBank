@@ -134,4 +134,21 @@ export class Customer {
     return result
   }
 
+  // Ambil age dimana age collection < age input
+  async getByAge(age: number) {
+    let result: CustomerType[]
+    try {
+      result = await this.model.aggregate([
+        {
+          $match: {
+            age: { $lt: age }
+          }
+        }
+      ]).exec()
+    } catch (error) {
+      throw error
+    }
+    return result
+  }
+
 }

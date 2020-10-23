@@ -99,6 +99,21 @@ app.get('/customers/state/:state', async (req, res, next) => {
   res.json(customers)
 })
 
+
+//@router GET /customers/age/:age
+//@desc Menampilkan data value params Path dari age $lessthan
+app.get('/customers/age/:age', async (req, res, next) => {
+  let customers: CustomerType[]
+  const age = parseInt(req.params.age)
+
+  try {
+    customers = await customerModel.getByAge(age)
+  } catch (error) {
+    return next(error)
+  }
+  res.json(customers)
+})
+
 app.listen(4000, () => {
   console.log('App listen to port 4000');
 });
